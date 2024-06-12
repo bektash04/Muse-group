@@ -1,0 +1,383 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями
+ */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Плавный скролл
+   */
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+  font-family: "Inter", sans-serif;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+ */
+svg *[fill] {
+  fill: currentColor;
+}
+
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+.container {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.header {
+  padding: 32px 0;
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.group {
+  padding: 40px 0;
+  background: #EEF0F2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 24px;
+}
+.group__title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 130%;
+  text-align: center;
+  color: #252323;
+}
+@media (max-width: 767px) {
+  .group__title {
+    font-weight: 600;
+    font-size: 22px;
+    padding: 0 24px;
+  }
+}
+.group__description {
+  max-width: 640px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #4b4b4b;
+}
+@media (max-width: 767px) {
+  .group__description {
+    padding: 0 24px;
+  }
+}
+@media (max-width: 767px) {
+  .group__image {
+    padding: 0 24px;
+    width: 100%;
+    height: auto;
+  }
+}
+.group__part {
+  display: flex;
+  column-gap: 10px;
+}
+@media (max-width: 767px) {
+  .group__part {
+    padding: 0 24px;
+  }
+}
+@media (max-width: 479px) {
+  .group__part {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    padding: 0 24px;
+  }
+}
+.group__part-input {
+  width: 324px;
+  height: 50px;
+  padding: 12px 140px 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 150%;
+  color: #3b3b3b;
+}
+@media (max-width: 479px) {
+  .group__part-input {
+    width: 100%;
+  }
+}
+.group__part-button {
+  border: none;
+  background: #3366FF;
+  border-radius: 8px;
+  padding: 10px 24px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+@media (max-width: 479px) {
+  .group__part-button {
+    width: 100%;
+  }
+}
+
+.products {
+  padding: 32px 0;
+}
+.products__title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 130%;
+  text-align: center;
+  color: #252323;
+  margin-bottom: 32px;
+  padding: 32px 0 0 0;
+}
+@media (max-width: 767px) {
+  .products__title {
+    font-size: 22px;
+    padding: 0 24px;
+  }
+}
+.products__list {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 12px;
+}
+@media (max-width: 767px) {
+  .products__list {
+    grid-template-columns: auto;
+    padding: 0 24px;
+  }
+}
+
+.product-card {
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  width: 314px;
+  height: 340px;
+  min-width: 180px;
+  position: relative;
+}
+@media (max-width: 767px) {
+  .product-card {
+    width: 271px;
+    height: 340px;
+  }
+}
+.product-card__img {
+  border-radius: 8px 8px 0 0;
+  width: 100%;
+  height: auto;
+}
+.product-card__body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  padding: 16px;
+}
+.product-card__body-mate {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+  color: #252323;
+}
+.product-card__body-description {
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 150%;
+  color: #4b4b4b;
+}
+.product-card__body-link {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+  color: #3366FF;
+  text-decoration: none;
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer__list {
+  display: flex;
+  align-items: center;
+  column-gap: 60px;
+  margin-bottom: 24px;
+}
+@media (max-width: 479px) {
+  .footer__list {
+    column-gap: 40px;
+    padding: 0 24px;
+  }
+}
+.footer__description {
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
+  color: #4b4b4b;
+  max-width: 592px;
+  margin-bottom: 32px;
+}
+@media (max-width: 767px) {
+  .footer__description {
+    padding: 0 24px;
+  }
+}
+.footer__link {
+  display: flex;
+  column-gap: 24px;
+}
+.footer__link-poin {
+  font-weight: 200;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 150%;
+  text-align: center;
+  color: #36f;
+  margin-bottom: 32px;
+}
+@media (max-width: 767px) {
+  .footer__link-poin {
+    padding: 0 24px;
+    font-size: 11px;
+    column-gap: 20px;
+  }
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,55 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__list {
+        display: flex;
+        align-items: center;
+        column-gap: 60px;
+        margin-bottom: 24px;
+
+        @include mobile-s {
+            column-gap: 40px;
+            padding: 0 24px;
+        }
+    }
+
+    &__description {
+        font-weight: 200;
+        font-size: 14px;
+        line-height: 150%;
+        text-align: center;
+        color: #4b4b4b;
+        max-width: 592px;
+        margin-bottom: 32px;
+
+        @include mobile {
+            padding: 0 24px;
+        }
+    }
+
+    &__link {
+        display: flex;
+        column-gap: 24px;
+
+        &-poin {
+            font-weight: 200;
+            text-decoration: none;
+            font-size: 13px;
+            line-height: 150%;
+            text-align: center;
+            color: #36f;
+            margin-bottom: 32px;
+
+            @include mobile {
+                padding: 0 24px;
+                font-size: 11px;
+                column-gap: 20px;
+            }
+        }
+
+    }
+
+
+}

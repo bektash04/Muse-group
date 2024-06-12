@@ -1,0 +1,33 @@
+.products {
+    padding: 32px 0;
+
+    &__title {
+        text-align: center;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 130%;
+        text-align: center;
+        color: #252323;
+        margin-bottom: 32px;
+        padding: 32px 0 0 0;
+
+        @include mobile {
+            font-size: 22px;
+            padding: 0 24px;
+
+        }
+
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        gap: 12px;
+
+        @include mobile {
+            grid-template-columns: auto;
+            padding: 0 24px;
+        }
+    }
+}
